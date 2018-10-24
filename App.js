@@ -1,11 +1,22 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { View, Platform, StatusBar, StyleSheet } from 'react-native'
 import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 
+import { Constants } from 'expo'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
+
+import { white, black, gray } from './utils/colors'
 
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
+
+function AppStatusBar ({ backgroundColor, ...props }) {
+  return (
+    <View style={{backgroundColor, height: Constants.statusBarHeight}} >
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+  )
+}
 
 const Tabs = createMaterialTopTabNavigator({
   Decks: {
@@ -24,13 +35,15 @@ const Tabs = createMaterialTopTabNavigator({
   }
 }, {
   navigationOptions: {
-    header: null
+    header: null,
   },
   tabBarOptions: {
-    //activeTintColor: Platform.OS === 'ios' ? purple : white,
+    tintColor: gray,
+    activeTintColor: black,
+    inactiveTintColor: gray,
     style: {
       height: 56,
-      //backgroundColor: Platform.OS === 'ios' ? white : purple,
+      backgroundColor: white,
       shadowColor: 'rgba(0, 0, 0, 0.24)',
       shadowOffset: {
         width: 0,
@@ -38,7 +51,23 @@ const Tabs = createMaterialTopTabNavigator({
       },
       shadowRadius: 6,
       shadowOpacity: 1
+    },
+    indicatorStyle: {
+      backgroundColor: black
     }
+  }
+})
+
+const MainNavigator = createStackNavigator({
+  Home: {
+    screen: Tabs,
+  },
+  NewDeck: {
+    screen: NewDeck
+  }
+}, {
+  navigationOptions: {
+    header: null,
   }
 })
 
@@ -46,7 +75,8 @@ export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
+        <AppStatusBar backgroundColor={gray} barStyle='light-content' />
+        <MainNavigator />
       </View>
     );
   }
@@ -54,9 +84,9 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1
+    //backgroundColor: '#fff',
+    //alignItems: 'center',
+    //justifyContent: 'center',
   },
 });

@@ -2,6 +2,10 @@ import React from 'react'
 import { View, Platform, StatusBar, StyleSheet } from 'react-native'
 import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+
 import { Constants } from 'expo'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 
@@ -9,6 +13,7 @@ import { white, black, gray } from './utils/colors'
 
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
+import DeckDetail from './components/DeckDetail'
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -62,6 +67,9 @@ const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
   },
+  DeckDetail: {
+    screen: DeckDetail
+  },
   NewDeck: {
     screen: NewDeck
   }
@@ -74,10 +82,12 @@ const MainNavigator = createStackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <AppStatusBar backgroundColor={gray} barStyle='light-content' />
-        <MainNavigator />
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <AppStatusBar backgroundColor={gray} barStyle='light-content' />
+          <MainNavigator />
+        </View>
+      </Provider>
     );
   }
 }
@@ -85,8 +95,5 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
-    //backgroundColor: '#fff',
-    //alignItems: 'center',
-    //justifyContent: 'center',
-  },
+  }
 });

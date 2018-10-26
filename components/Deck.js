@@ -2,14 +2,19 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { white, orange } from '../utils/colors'
+import { withNavigation } from 'react-navigation'
+//import { connect } from 'react-redux'
 
 class Deck extends Component {
 	render() {
-		const { title, count } = this.props
+		const { id, title, count } = this.props
+		const { navigate } = this.props.navigation
 
 		return (
 			<View style={styles.item}>
-				<TouchableOpacity>
+				<TouchableOpacity onPress={() =>
+					navigate('DeckDetail', { deckId: id })
+				}>
 					<View style={{ flexDirection: 'row'}}>
 						<MaterialCommunityIcons name='cards' size={44} color={orange} style={styles.deckIcon} />
 						<View>
@@ -26,7 +31,7 @@ class Deck extends Component {
 const styles = StyleSheet.create({
 	item: {
 		backgroundColor: white,
-		borderRadius: Platform.OS === 'ios' ? 16 : 4,
+		borderRadius: Platform.OS === 'ios' ? 16 : 6,
 		padding: 15,
 		marginLeft: 15,
 		marginRight: 15,
@@ -41,4 +46,5 @@ const styles = StyleSheet.create({
 	}
 })
 
-export default Deck
+//export default connect()(Deck)
+export default withNavigation(Deck)

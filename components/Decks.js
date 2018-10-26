@@ -3,6 +3,8 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native
 import { AppLoading } from 'expo'
 import Deck from './Deck'
 
+import { connect } from 'react-redux'
+
 import { white } from '../utils/colors'
 import { getDecks } from '../utils/api'
 
@@ -32,15 +34,12 @@ class Decks extends Component {
 
 		return (
 			<View>
-				<Deck title='Udacicards' count={3} />
-				<Deck title='new deck' count={0} />
-				<Deck title='New deck 2' count={5} />
-				{Object.values(decks).map((deck) => (
-					<Deck key={deck.title} title={deck.title} count={deck.questions.length} />
+				{Object.values(decks).map((deck, index) => (
+					<Deck key={index} id={deck.title} title={deck.title} count={deck.questions.length} />
 				))}
 			</View>
 		)
 	}
 }
 
-export default Decks
+export default connect()(Decks)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
-import { white, orange, gray, blue, red } from '../utils/colors'
+import { white, blue, red } from '../utils/colors'
 
 class DeckDetail extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -14,12 +14,15 @@ class DeckDetail extends Component {
 
 	render() {
 		const { deck } = this.props
+		const { navigate } = this.props.navigation
 
 		return (
 			<View style={styles.container}>
 				<Text style={styles.deckTitle}>{deck.title}</Text>
 				<Text style={styles.deckSubtitle}>{`${deck.count} cards`}</Text>
-				<TouchableOpacity style={styles.button}>
+				<TouchableOpacity style={styles.button} onPress={() =>
+					navigate('AddCard', { deckId: 5 })
+				}>
 					<Text style={styles.buttonText}>
 						Add Card
 					</Text>

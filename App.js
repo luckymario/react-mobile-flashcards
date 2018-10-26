@@ -66,16 +66,28 @@ const Tabs = createMaterialTopTabNavigator({
 const MainNavigator = createStackNavigator({
   Home: {
     screen: Tabs,
+    navigationOptions: {
+      header: null
+    }
   },
   DeckDetail: {
-    screen: DeckDetail
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: gray,
+      headerStyle: {
+        backgroundColor: white
+      },
+      headerForceInset: {
+        top: 'never'
+      },
+      headerTitleStyle: {
+        width: '100%',
+        marginLeft: 0
+      }
+    }
   },
   NewDeck: {
     screen: NewDeck
-  }
-}, {
-  navigationOptions: {
-    header: null,
   }
 })
 

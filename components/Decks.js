@@ -7,26 +7,30 @@ import { connect } from 'react-redux'
 
 import { white } from '../utils/colors'
 import { getDecks } from '../utils/api'
+import { receiveDecks } from '../actions'
 
 import { AsyncStorage } from 'react-native'
 
 class Decks extends Component {
 	state = {
-		ready: true,
-		decks: {}
+		ready: false
 	}
 
 	componentDidMount() {
+		const { dispatch } = this.props
+
 		getDecks()
 			.then((decks) => {
-				this.setState(() => ({
-					decks
-				}))
+				dispatch(receiveDecks(decks))
 			})
+			.then(() => this.setState(() => ({
+				ready: true
+			})))
 	}
 
 	render() {
-		const { ready, decks } = this.state
+		const { ready } = this.state
+		const { decks } = this.props
 
 		if (ready === false) {
 			return <AppLoading />
@@ -42,4 +46,10 @@ class Decks extends Component {
 	}
 }
 
-export default connect()(Decks)
+function mapStateToProps (decks) {
+	return {
+		decks
+	}
+}
+
+export default connect(mapStateToProps)(Decks)

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { View, Platform, StatusBar, StyleSheet } from 'react-native'
 import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation'
 
@@ -14,6 +14,7 @@ import { white, black, gray } from './utils/colors'
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
 import DeckDetail from './components/DeckDetail'
+import AddCard from './components/AddCard'
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -87,11 +88,46 @@ const MainNavigator = createStackNavigator({
     }
   },
   NewDeck: {
-    screen: NewDeck
+    screen: DeckDetail,
+    navigationOptions: {
+      headerTintColor: gray,
+      headerStyle: {
+        backgroundColor: white
+      },
+      headerForceInset: {
+        top: 'never'
+      },
+      headerTitleStyle: {
+        width: '100%',
+        marginLeft: 0
+      }
+    }
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: {
+      headerTintColor: gray,
+      headerStyle: {
+        backgroundColor: white
+      },
+      headerForceInset: {
+        top: 'never'
+      },
+      headerTitleStyle: {
+        width: '100%',
+        marginLeft: 0
+      }
+    }
   }
 })
 
-export default class App extends React.Component {
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+})
+
+class App extends Component {
   render() {
     return (
       <Provider store={createStore(reducer)}>
@@ -104,8 +140,4 @@ export default class App extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  }
-});
+export default App

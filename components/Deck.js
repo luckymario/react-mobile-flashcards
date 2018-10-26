@@ -7,19 +7,19 @@ import { withNavigation } from 'react-navigation'
 
 class Deck extends Component {
 	render() {
-		const { id, title, count } = this.props
+		const { deck } = this.props
 		const { navigate } = this.props.navigation
 
 		return (
 			<View style={styles.item}>
 				<TouchableOpacity onPress={() =>
-					navigate('DeckDetail', { deckId: id })
+					navigate('DeckDetail', { deckId: deck.id, title: deck.title })
 				}>
 					<View style={{ flexDirection: 'row'}}>
 						<MaterialCommunityIcons name='cards' size={44} color={orange} style={styles.deckIcon} />
 						<View>
-							<Text style={styles.deckName}>{title}</Text>
-							<Text>{`${count} cards`}</Text>
+							<Text style={styles.deckName}>{deck.title}</Text>
+							<Text>{`${deck.questions.length} cards`}</Text>
 						</View>
 					</View>
 				</TouchableOpacity>

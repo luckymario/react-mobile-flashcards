@@ -39,7 +39,7 @@ class Decks extends Component {
 		return (
 			<View>
 				{Object.values(decks).map((deck, index) => (
-					<Deck key={index} id={deck.title} title={deck.title} count={deck.questions.length} />
+					<Deck key={index} deck={deck} />
 				))}
 			</View>
 		)

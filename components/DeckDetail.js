@@ -5,10 +5,10 @@ import { white, blue, red } from '../utils/colors'
 
 class DeckDetail extends Component {
 	static navigationOptions = ({ navigation }) => {
-		const { deckId } = navigation.state.params
+		const { title } = navigation.state.params
 
 		return {
-			title: `${deckId}`
+			title: `${title}`
 		}
 	}
 
@@ -19,7 +19,7 @@ class DeckDetail extends Component {
 		return (
 			<View style={styles.container}>
 				<Text style={styles.deckTitle}>{deck.title}</Text>
-				<Text style={styles.deckSubtitle}>{`${deck.count} cards`}</Text>
+				<Text style={styles.deckSubtitle}>{`${deck.questions.length} cards`}</Text>
 				<TouchableOpacity style={styles.button} onPress={() =>
 					navigate('AddCard', { deckId: 5 })
 				}>
@@ -34,23 +34,6 @@ class DeckDetail extends Component {
 				</TouchableOpacity>
 			</View>
 		)
-	}
-}
-
-function mapStateToProps (state, { navigation }) {
-	const { deckId } = navigation.state.params
-
-	return {
-		deckId,
-		deck: { title: 'test', count: '5' }, // state[deckId]
-	}
-}
-
-function mapDispatchToProps (dispatch, { navigation }) {
-	const { deckId } = navigation.state.params
-
-	return {
-		goBack: () => navigation.goBack()
 	}
 }
 
@@ -84,4 +67,20 @@ const styles = StyleSheet.create({
   }
 })
 
+function mapStateToProps (state, { navigation }) {
+	const { deckId } = navigation.state.params
+
+	return {
+		deckId,
+		deck: state[deckId]
+	}
+}
+
+function mapDispatchToProps (dispatch, { navigation }) {
+	const { deckId } = navigation.state.params
+
+	return {
+		goBack: () => navigation.goBack()
+	}
+}
 export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail)

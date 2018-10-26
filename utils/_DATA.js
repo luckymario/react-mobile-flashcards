@@ -1,5 +1,6 @@
 export const decks = {
   React: {
+    id: 'React',
     title: 'React',
     questions: [
       {
@@ -13,6 +14,7 @@ export const decks = {
     ]
   },
   JavaScript: {
+    id: 'JavaScript',
     title: 'JavaScript',
     questions: [
       {

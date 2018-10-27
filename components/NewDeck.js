@@ -36,15 +36,8 @@ class NewDeck extends Component {
 		}))
 
 		this.toDeck(newDeck.id, newDeck.title)
-		//this.toHome()
 
 		saveDeck(id, newDeck)
-	}
-
-	toHome = () => {
-		this.props.navigation.dispatch(NavigationActions.back({
-			key: 'NewDeck'
-		}))
 	}
 
 	toDeck = (deckId, title) => {
@@ -98,7 +91,9 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 40,
 		fontSize: 20,
-		marginBottom: 50
+		marginBottom: 50,
+		paddingLeft: 5,
+		paddingBottom: 5
 	},
   button: {
   	width: 150,

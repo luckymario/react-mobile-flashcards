@@ -21,7 +21,7 @@ class DeckDetail extends Component {
 				<Text style={styles.deckTitle}>{deck.title}</Text>
 				<Text style={styles.deckSubtitle}>{`${deck.questions.length} cards`}</Text>
 				<TouchableOpacity style={styles.button} onPress={() =>
-					navigate('NewQuestion', { deckId: 5 })
+					navigate('NewQuestion', { deckId: deck.id })
 				}>
 					<Text style={styles.buttonText}>
 						Add Card
@@ -76,11 +76,4 @@ function mapStateToProps (state, { navigation }) {
 	}
 }
 
-function mapDispatchToProps (dispatch, { navigation }) {
-	const { deckId } = navigation.state.params
-
-	return {
-		goBack: () => navigation.goBack()
-	}
-}
-export default connect(mapStateToProps, mapDispatchToProps)(DeckDetail)
+export default connect(mapStateToProps)(DeckDetail)

@@ -22,23 +22,15 @@ export function saveDeck (id, deck) {
 }
 
 // addCardToDeck: take in two arguments, title and card, and will add the card to the list of questions for the deck with the associated title.
-export function addCardToDeck () {
-	//return AsyncStorage.getItem(decks)
+export function addCardToDeck (deckId, card) {
+	return AsyncStorage.getItem('decks')
+		.then((results) => {
+			const data = JSON.parse(results)
+			data[deckId].questions.concat([card])
+			AsyncStorage.setItem('decks', JSON.stringify(data))
+		})
 }
 
 export function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }
-
-/*export const CALENDAR_STORAGE_KEY = 'UdaciFitness:calendar'
-
-export function fetchCalendarResults () {
-	return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
-		.then(formatCalendarResults)
-}
-
-export function submitEntry ({ entry, key }) {
-	return AsyncStorage.mergeItem(CALENDAR_STORAGE_KEY, JSON.stringify({
-		[key]: entry,
-	}))
-}*/

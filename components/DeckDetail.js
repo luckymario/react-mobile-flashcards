@@ -21,7 +21,7 @@ class DeckDetail extends Component {
 				<Text style={styles.deckTitle}>{deck.title}</Text>
 				<Text style={styles.deckSubtitle}>{`${deck.questions.length} cards`}</Text>
 				<TouchableOpacity style={styles.button} onPress={() =>
-					navigate('AddCard', { deckId: 5 })
+					navigate('NewQuestion', { deckId: 5 })
 				}>
 					<Text style={styles.buttonText}>
 						Add Card

@@ -14,7 +14,7 @@ import { white, black, gray } from './utils/colors'
 import Decks from './components/Decks'
 import NewDeck from './components/NewDeck'
 import DeckDetail from './components/DeckDetail'
-import AddCard from './components/AddCard'
+import NewQuestion from './components/NewQuestion'
 
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
@@ -103,8 +103,8 @@ const MainNavigator = createStackNavigator({
       }
     }
   },
-  AddCard: {
-    screen: AddCard,
+  NewQuestion: {
+    screen: NewQuestion,
     navigationOptions: {
       headerTintColor: gray,
       headerStyle: {

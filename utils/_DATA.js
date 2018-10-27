@@ -1,6 +1,6 @@
 export const decks = {
-  React: {
-    id: 'React',
+  '8xf0y6ziyjabvozdd253nd': {
+    id: '8xf0y6ziyjabvozdd253nd',
     title: 'React',
     questions: [
       {
@@ -13,8 +13,8 @@ export const decks = {
       }
     ]
   },
-  JavaScript: {
-    id: 'JavaScript',
+  'am8ehyc8byjqgar0jgpub9': {
+    id: 'am8ehyc8byjqgar0jgpub9',
     title: 'JavaScript',
     questions: [
       {

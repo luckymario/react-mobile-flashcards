@@ -9,9 +9,11 @@ function decks (state = {}, action) {
 			}
 
 		case ADD_DECK:
+			const { deck } = action
+
 			return {
 				...state,
-				...action.deck
+				[deck.id]: deck
 			}
 
 		default:

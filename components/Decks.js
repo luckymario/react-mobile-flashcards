@@ -4,7 +4,6 @@ import { AppLoading } from 'expo'
 import Deck from './Deck'
 
 import { connect } from 'react-redux'
-
 import { white } from '../utils/colors'
 import { getDecks } from '../utils/api'
 import { receiveDecks } from '../actions'

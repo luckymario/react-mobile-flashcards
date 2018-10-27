@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native'
 import { decks } from './_DATA'
 
-AsyncStorage.setItem('decks', JSON.stringify(decks))
+//AsyncStorage.setItem('decks', JSON.stringify(decks))
 
 // getDecks: return all of the decks along with their titles, questions, and answers.
 export function getDecks () {
@@ -10,8 +10,10 @@ export function getDecks () {
 }
 
 // getDeck: take in a single id argument and return the deck associated with that id.
-export function getDeck () {
-	//return AsyncStorage.getItem(decks)
+export function getDeck (id) {
+	return AsyncStorage.getItem('decks')
+		.then((results) => JSON.parse(results))
+		.then((data) => data[id])
 }
 
 // saveDeckTitle: take in a single title argument and add it to the decks.
@@ -25,9 +27,9 @@ export function saveDeck (id, deck) {
 export function addCardToDeck (deckId, card) {
 	return AsyncStorage.getItem('decks')
 		.then((results) => {
-			const data = JSON.parse(results)
-			data[deckId].questions.concat([card])
-			AsyncStorage.setItem('decks', JSON.stringify(data))
+			const decks = JSON.parse(results)
+			decks[deckId].questions = decks[deckId].questions.concat([card])
+			AsyncStorage.setItem('decks', JSON.stringify(decks))
 		})
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import { NavigationActions } from 'react-navigation'
-import { white, gray, green, red } from '../utils/colors'
+import { white, gray, green, red, blue } from '../utils/colors'
 import { connect } from 'react-redux'
 import { addQuestionAnswer } from '../actions'
 import { saveQuestionAnswer } from '../utils/api'
@@ -24,22 +24,29 @@ class Quiz extends Component {
 	}
 
 	handleAnswerQuestion = (questionIndex, guess) => {
-		const { deckId, dispatch } = this.props
+		const { dispatch, deckId } = this.props
 
 		const question = {
-			deckId,
 			index: questionIndex,
 			guess
 		}
 
-		dispatch(addQuestionAnswer(question))
+		dispatch(addQuestionAnswer(deckId, question))
 		saveQuestionAnswer(deckId, questionIndex, guess)
+	}
+
+	handleRestartQuiz = () => {
+		const { dispatch, deckId, questions } = this.props
+
+		for (index = 0; index < questions.length; index++) {
+			dispatch(addQuestionAnswer(deckId, { index, guess: null }))
+			saveQuestionAnswer(deckId, index, null)
+		}
 	}
 
 	render() {
 		const { showAnswer } = this.state
-		const { navigate } = this.props.navigation
-		const { questions, unansweredQuestions } = this.props
+		const { questions, unansweredQuestions, score, goBack } = this.props
 		const index = unansweredQuestions.length ? questions.indexOf(unansweredQuestions[0]) : null
 
 		return unansweredQuestions.length
@@ -71,8 +78,24 @@ class Quiz extends Component {
 					</TouchableOpacity>
 				</View>)
 			: (<View style={styles.container}>
-					<Text style={styles.showAnswer}>Score</Text>
-					<Text>{JSON.stringify(unansweredQuestions)}</Text>
+					<Text style={styles.scoreText}>Your score</Text>
+					<Text style={styles.scoreNumber}>{score}%</Text>
+					<TouchableOpacity
+						style={[styles.button, { backgroundColor: blue }]}
+						onPress={goBack}
+					>
+						<Text style={styles.buttonText}>
+							Back to Deck
+						</Text>
+					</TouchableOpacity>
+					<TouchableOpacity
+						style={[styles.button, { backgroundColor: red }]}
+						onPress={this.handleRestartQuiz}
+					>
+						<Text style={styles.buttonText}>
+							Restart Quiz
+						</Text>
+					</TouchableOpacity>
 				</View>)
 	}
 }
@@ -108,6 +131,14 @@ const styles = StyleSheet.create({
 		marginBottom: 100,
 		fontSize: 18
 	},
+	scoreText: {
+		fontSize: 40,
+	},
+	scoreNumber: {
+		fontSize: 50,
+		color: red,
+		marginBottom: 100
+	},
   button: {
   	width: 150,
     padding: 10,
@@ -126,11 +157,15 @@ function mapStateToProps (state, { navigation }) {
 	const { deckId } = navigation.state.params
 	const questions = state[deckId].questions
 	const unansweredQuestions = questions.filter((q) => q.guess === null)
+	const correctAnswers = questions.filter((q) => q.guess === 'correct')
+	const score = Math.round(correctAnswers.length * 100 / questions.length)
 
 	return {
 		deckId,
 		questions,
-		unansweredQuestions
+		unansweredQuestions,
+		score,
+		goBack: () => navigation.goBack()
 	}
 }
 

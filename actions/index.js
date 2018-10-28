@@ -25,9 +25,10 @@ export function addCard (deckId, card) {
 	}
 }
 
-export function addQuestionAnswer (question) {
+export function addQuestionAnswer (deckId, question) {
 	return {
 		type: ADD_QUESTION_ANSWER,
+		deckId,
 		question
 	}
 }

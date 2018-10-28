@@ -29,20 +29,19 @@ function decks (state = {}, action) {
 
 		case ADD_QUESTION_ANSWER :
       const { question } = action
-      //const deckId = question.deckId
       const index = parseInt(question.index, 10)
 
 			return {
         ...state,
-        [question.deckId]: {
-          ...state[question.deckId],
+        [action.deckId]: {
+          ...state[action.deckId],
           questions: [
-          	...state[question.deckId].questions.slice(0, index),
+          	...state[action.deckId].questions.slice(0, index),
           	{
-          		...state[question.deckId].questions[index],
+          		...state[action.deckId].questions[index],
           		guess: question.guess
           	},
-          	...state[question.deckId].questions.slice(index + 1),
+          	...state[action.deckId].questions.slice(index + 1),
           ]
         }
 			}

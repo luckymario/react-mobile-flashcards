@@ -5,7 +5,8 @@ import { white, blue, gray } from '../utils/colors'
 
 import { connect } from 'react-redux'
 import { addDeck } from '../actions'
-import { saveDeck, generateUID } from '../utils/api'
+import { saveDeck } from '../utils/api'
+import { generateUID } from '../utils/helpers'
 
 class NewDeck extends Component {
 	state = {

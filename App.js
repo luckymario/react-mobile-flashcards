@@ -17,6 +17,8 @@ import DeckDetail from './components/DeckDetail'
 import NewQuestion from './components/NewQuestion'
 import Quiz from './components/Quiz'
 
+import { setLocalNotification } from './utils/helpers'
+
 function AppStatusBar ({ backgroundColor, ...props }) {
   return (
     <View style={{backgroundColor, height: Constants.statusBarHeight}} >
@@ -145,6 +147,10 @@ const styles = StyleSheet.create({
 })
 
 class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
+
   render() {
     return (
       <Provider store={createStore(reducer)}>

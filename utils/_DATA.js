@@ -1,3 +1,4 @@
+// Initial data
 export const decks = {
   '8xf0y6ziyjabvozdd253nd': {
     id: '8xf0y6ziyjabvozdd253nd',

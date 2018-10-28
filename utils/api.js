@@ -2,6 +2,16 @@ import { AsyncStorage } from 'react-native'
 import { decks } from './_DATA'
 
 //AsyncStorage.setItem('decks', JSON.stringify(decks))
+//AsyncStorage.removeItem('decks')
+
+// Set initial data
+/*AsyncStorage.getItem('decks')
+  .then(JSON.parse)
+  .then((data) => {
+    if (data === null) {
+    	AsyncStorage.setItem('decks', JSON.stringify(decks))
+    }
+  })*/
 
 // getDecks: return all of the decks along with their titles, questions, and answers.
 export function getDecks () {
@@ -40,8 +50,4 @@ export function saveQuestionAnswer (deckId, questionIndex, guess) {
 			decks[deckId].questions[questionIndex] = guess
 			AsyncStorage.setItem('decks', JSON.stringify(decks))
 		})
-}
-
-export function generateUID () {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }

@@ -5,6 +5,7 @@ import { white, gray, green, red, blue } from '../utils/colors'
 import { connect } from 'react-redux'
 import { addQuestionAnswer } from '../actions'
 import { saveQuestionAnswer } from '../utils/api'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Quiz extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -33,6 +34,9 @@ class Quiz extends Component {
 
 		dispatch(addQuestionAnswer(deckId, question))
 		saveQuestionAnswer(deckId, questionIndex, guess)
+
+		clearLocalNotification()
+			.then(setLocalNotification)
 	}
 
 	handleRestartQuiz = () => {
@@ -156,9 +160,9 @@ const styles = StyleSheet.create({
 function mapStateToProps (state, { navigation }) {
 	const { deckId } = navigation.state.params
 	const questions = state[deckId].questions
-	const unansweredQuestions = questions.filter((q) => q.guess === null)
-	const correctAnswers = questions.filter((q) => q.guess === 'correct')
-	const score = Math.round(correctAnswers.length * 100 / questions.length)
+	const unansweredQuestions = questions ? questions.filter((q) => q.guess === null) : []
+	const correctAnswers = questions ? questions.filter((q) => q.guess === 'correct') : []
+	const score = (correctAnswers && questions) ? Math.round(correctAnswers.length * 100 / questions.length) : null
 
 	return {
 		deckId,

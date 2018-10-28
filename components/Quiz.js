@@ -4,6 +4,7 @@ import { NavigationActions } from 'react-navigation'
 import { white, gray, green, red } from '../utils/colors'
 import { connect } from 'react-redux'
 import { addQuestionAnswer } from '../actions'
+import { saveQuestionAnswer } from '../utils/api'
 
 class Quiz extends Component {
 	static navigationOptions = ({ navigation }) => {
@@ -32,7 +33,7 @@ class Quiz extends Component {
 		}
 
 		dispatch(addQuestionAnswer(question))
-		//saveQuestionAnswer(deckId, questionIndex, guess)
+		saveQuestionAnswer(deckId, questionIndex, guess)
 	}
 
 	render() {

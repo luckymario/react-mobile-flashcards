@@ -33,6 +33,15 @@ export function addCardToDeck (deckId, card) {
 		})
 }
 
+export function saveQuestionAnswer (deckId, questionIndex, guess) {
+	return AsyncStorage.getItem('decks')
+		.then((results) => {
+			const decks = JSON.parse(results)
+			decks[deckId].questions[questionIndex] = guess
+			AsyncStorage.setItem('decks', JSON.stringify(decks))
+		})
+}
+
 export function generateUID () {
   return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 }

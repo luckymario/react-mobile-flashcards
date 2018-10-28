@@ -1,4 +1,4 @@
-import { RECEIVE_DECKS, ADD_DECK, ADD_CARD } from '../actions'
+import { RECEIVE_DECKS, ADD_DECK, ADD_CARD, ADD_QUESTION_ANSWER } from '../actions'
 
 function decks (state = {}, action) {
 	switch (action.type) {
@@ -24,6 +24,26 @@ function decks (state = {}, action) {
         [deckId]: {
           ...state[deckId],
           questions: state[deckId].questions.concat([card])
+        }
+			}
+
+		case ADD_QUESTION_ANSWER :
+      const { question } = action
+      //const deckId = question.deckId
+      const index = parseInt(question.index, 10)
+
+			return {
+        ...state,
+        [question.deckId]: {
+          ...state[question.deckId],
+          questions: [
+          	...state[question.deckId].questions.slice(0, index),
+          	{
+          		...state[question.deckId].questions[index],
+          		guess: question.guess
+          	},
+          	...state[question.deckId].questions.slice(index + 1),
+          ]
         }
 			}
 

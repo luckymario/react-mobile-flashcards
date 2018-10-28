@@ -37,7 +37,8 @@ class NewQuestion extends Component {
 
 		const newCard = {
 			question,
-			answer
+			answer,
+			guess: null
 		}
 
 		dispatch(addCard(deckId, newCard))

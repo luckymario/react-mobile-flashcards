@@ -18,22 +18,26 @@ class DeckDetail extends Component {
 
 		return (
 			<View style={styles.container}>
-				<Text style={styles.deckTitle}>{deck.title}</Text>
-				<Text style={styles.deckSubtitle}>{`${deck.questions.length} cards`}</Text>
-				<TouchableOpacity style={styles.button} onPress={() =>
-					navigate('NewQuestion', { deckId: deck.id })
-				}>
-					<Text style={styles.buttonText}>
-						Add Card
-					</Text>
-				</TouchableOpacity>
-				<TouchableOpacity style={[styles.button, { backgroundColor: red }]} onPress={() =>
-					navigate('Quiz', { deckId: deck.id })
-				}>
-					<Text style={styles.buttonText}>
-						Start Quiz
-					</Text>
-				</TouchableOpacity>
+				<View>
+					<Text style={styles.deckTitle}>{deck.title}</Text>
+					<Text style={styles.deckSubtitle}>{`${deck.questions.length} cards`}</Text>
+				</View>
+				<View>
+					<TouchableOpacity style={styles.button} onPress={() =>
+						navigate('NewQuestion', { deckId: deck.id })
+					}>
+						<Text style={styles.buttonText}>
+							Add Card
+						</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={[styles.button, { backgroundColor: red }]} onPress={() =>
+						navigate('Quiz', { deckId: deck.id })
+					}>
+						<Text style={styles.buttonText}>
+							Start Quiz
+						</Text>
+					</TouchableOpacity>
+				</View>
 			</View>
 		)
 	}
@@ -42,7 +46,7 @@ class DeckDetail extends Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     alignItems: 'center',
     marginLeft: 30,
     marginRight: 30,
@@ -51,7 +55,6 @@ const styles = StyleSheet.create({
 		fontSize: 50
 	},
 	deckSubtitle: {
-		marginBottom: 200,
 		fontSize: 20
 	},
   button: {

@@ -55,7 +55,7 @@ class Quiz extends Component {
 
 		return unansweredQuestions.length
 			? (<View style={styles.container}>
-					<Text style={styles.showAnswer}>{`Question ${index+1} of ${questions.length}`}</Text>
+					<Text style={styles.questionCounter}>{`Question ${index+1} of ${questions.length}`}</Text>
 					<View style={showAnswer ? [styles.card, { backgroundColor: gray }] : styles.card}>
 						{showAnswer
 							? <Text style={styles.answer}>{unansweredQuestions[0].answer}</Text>
@@ -112,6 +112,10 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     marginRight: 25,
 	},
+	questionCounter: {
+		fontSize: 18,
+		marginBottom: 100,
+	},
 	card: {
 		backgroundColor: white,
 		borderRadius: 8,
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state, { navigation }) {
 	const { deckId } = navigation.state.params
-	const questions = state[deckId].questions
+	const questions = state[deckId].hasOwnProperty('questions') ? state[deckId].questions : null
 	const unansweredQuestions = questions ? questions.filter((q) => q.guess === null) : []
 	const correctAnswers = questions ? questions.filter((q) => q.guess === 'correct') : []
 	const score = (correctAnswers && questions) ? Math.round(correctAnswers.length * 100 / questions.length) : null

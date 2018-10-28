@@ -3,7 +3,6 @@ import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { white, orange } from '../utils/colors'
 import { withNavigation } from 'react-navigation'
-//import { connect } from 'react-redux'
 
 class Deck extends Component {
 	render() {
@@ -46,5 +45,4 @@ const styles = StyleSheet.create({
 	}
 })
 
-//export default connect()(Deck)
 export default withNavigation(Deck)

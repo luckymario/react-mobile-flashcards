@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "react-mobile-flashcards",
-    "description": "This project is really great.",
+    "name": "Flashcards",
+    "description": "The best Flashcards app for Udacity team :)",
     "slug": "react-mobile-flashcards",
     "privacy": "public",
     "sdkVersion": "30.0.0",
@@ -9,6 +9,9 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
+    "notification": {
+      "icon": "./assets/icon.png"
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -21,7 +24,11 @@
       "**/*"
     ],
     "ios": {
+      "bundleIdentifier": "org.flashcards.exp",
       "supportsTablet": true
+    },
+    "android": {
+     "package": "org.flashcards.exp",
     }
   }
 }

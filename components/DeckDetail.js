@@ -15,12 +15,13 @@ class DeckDetail extends Component {
 	render() {
 		const { deck } = this.props
 		const { navigate } = this.props.navigation
+		const cardsNumber = deck.questions.length
 
 		return (
 			<View style={styles.container}>
 				<View>
 					<Text style={styles.deckTitle}>{deck.title}</Text>
-					<Text style={styles.deckSubtitle}>{`${deck.questions.length} cards`}</Text>
+					<Text style={styles.deckSubtitle}>{cardsNumber} {cardsNumber === 1 ? 'card' : 'cards'}</Text>
 				</View>
 				<View>
 					<TouchableOpacity style={styles.button} onPress={() =>

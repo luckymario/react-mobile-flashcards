@@ -8,6 +8,7 @@ class Deck extends Component {
 	render() {
 		const { deck } = this.props
 		const { navigate } = this.props.navigation
+		const cardsNumber = deck.questions.length
 
 		return (
 			<View style={styles.item}>
@@ -18,7 +19,7 @@ class Deck extends Component {
 						<MaterialCommunityIcons name='cards' size={44} color={orange} style={styles.deckIcon} />
 						<View>
 							<Text style={styles.deckName}>{deck.title}</Text>
-							<Text>{`${deck.questions.length} cards`}</Text>
+							<Text>{cardsNumber} {cardsNumber === 1 ? 'card' : 'cards'}</Text>
 						</View>
 					</View>
 				</TouchableOpacity>

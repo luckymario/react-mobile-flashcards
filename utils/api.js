@@ -43,7 +43,7 @@ export function saveQuestionAnswer (deckId, questionIndex, guess) {
 	return AsyncStorage.getItem('decks')
 		.then((results) => {
 			const decks = JSON.parse(results)
-			decks[deckId].questions[questionIndex] = guess
+			decks[deckId].questions[questionIndex].guess = guess
 			AsyncStorage.setItem('decks', JSON.stringify(decks))
 		})
 }

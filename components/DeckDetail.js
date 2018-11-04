@@ -31,9 +31,13 @@ class DeckDetail extends Component {
 							Add Card
 						</Text>
 					</TouchableOpacity>
-					<TouchableOpacity style={[styles.button, { backgroundColor: red }]} onPress={() =>
-						navigate('Quiz', { deckId: deck.id })
-					}>
+					<TouchableOpacity
+						style={[styles.button, { backgroundColor: red }]}
+						onPress={() =>
+							navigate('Quiz', { deckId: deck.id })
+						}
+						disabled={cardsNumber === 0}
+					>
 						<Text style={styles.buttonText}>
 							Start Quiz
 						</Text>

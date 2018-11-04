@@ -35,6 +35,10 @@ class Quiz extends Component {
 		dispatch(addQuestionAnswer(deckId, question))
 		saveQuestionAnswer(deckId, questionIndex, guess)
 
+		this.setState(() => ({
+			showAnswer: false
+		}))
+
 		clearLocalNotification()
 			.then(setLocalNotification)
 	}
@@ -46,6 +50,10 @@ class Quiz extends Component {
 			dispatch(addQuestionAnswer(deckId, { index, guess: null }))
 			saveQuestionAnswer(deckId, index, null)
 		}
+
+		this.setState(() => ({
+			showAnswer: false
+		}))
 	}
 
 	render() {
